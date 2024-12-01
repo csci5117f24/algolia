@@ -5,7 +5,7 @@ import json
 # Algolia Config from .env (NECESSARY)
 ALGOLIA_APP_ID = env["ALGOLIA_APP_ID"]
 ALGOLIA_API_KEY = env["ALGOLIA_API_KEY"]
-ALGOLIA_WORKOUT_INDEX = env["ALGOLIA_WORKOUT_INDEX"]
+ALGOLIA_WORKOUT_INDEX = "Workouts"
 
 client = SearchClientSync(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
 
