@@ -37,6 +37,11 @@ def search_index(query, index_name=ALGOLIA_WORKOUT_INDEX):
     # turn to json object and return
     return json.loads(res.to_json())
 
+# Function to add multiple workouts to the index (such as when bulk importing)
+# workouts is a JSON object with all the data for each workout (such as id, title, etc.)
+def bulk_add_workouts(workouts):
+    client.save_objects(index_name=ALGOLIA_WORKOUT_INDEX, objects=workouts)
+
 # Function to delete all records for a given username
 # def algolia_delete_user(username):
 #     res = search_index(username, ALGOLIA_WORKOUT_INDEX)
