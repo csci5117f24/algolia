@@ -3,6 +3,6 @@ CREATE TABLE workouts (
     title TEXT NOT NULL,
     details TEXT NOT NULL,
     sport TEXT NOT NULL,
-    levelDiff TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
