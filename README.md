@@ -1,2 +1,2 @@
-# algolia
-Team Codemaxxing Tech Share on Algolia Search
+# Team Codemaxxing Tech Share
+TODO
