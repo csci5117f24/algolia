@@ -164,3 +164,23 @@ def update_workout(id, title, details, sport, difficulty):
         
     
     
+
+
+# regular sql search
+def search_workouts(search_query=None):
+    with get_db_cursor_realdict() as cur:
+        if search_query:
+            # SQL query with LIKE to search by title or details
+            search_pattern = f"%{search_query}%"
+            cur.execute("""
+                SELECT * FROM workouts
+                WHERE title ILIKE %s OR details ILIKE %s
+                ORDER BY created_at DESC;
+            """, (search_pattern, search_pattern))
+        else:
+            # Fetch all workouts if no search query is provided
+            cur.execute("""
+                SELECT * FROM workouts
+                ORDER BY created_at DESC;
+            """)
+        return cur.fetchall()
