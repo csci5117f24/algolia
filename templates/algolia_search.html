@@ -41,11 +41,6 @@
                 <div id="sortContainer" class="sort-container"></div>
             </div>
         </div>
-        <div class="level-item">
-            <button class="" onclick="window.location.href='/createworkout'"> 
-                <i class="fa fa-plus"></i> Create Workout
-            </button>
-        </div>
     </div>
 </nav>
 
@@ -68,8 +63,8 @@
 
     // Initialize the search
     const search = instantsearch({
-        indexName: 'Project1_upvotes_desc',
-        searchClient: algoliasearch('TXUA4KW9VM', 'd2a3cdfe11a4b3f10359f4eae06a75fe'),
+        indexName: 'Workouts',
+        searchClient: algoliasearch('JW8PD7RSTA', 'f76f66853fdc7aa003688dfe31a703b2'),
     });
 
     // Search box widget
@@ -123,9 +118,9 @@
                     <div class="">
                         <div id="${hit.objectID}" class="card m-4 p-4">
                             <div class="title">${instantsearch.highlight({ attribute: 'title', hit })}</div>
-                            <div class="subtitle">${instantsearch.highlight({ attribute: 'short_description', hit })}</div>
+                            <div class="subtitle">${instantsearch.highlight({ attribute: 'details', hit })}</div>
                             <div class="created-at">${hit.created_at}</div>
-                            <div class="levelDiff">${hit.leveldiff} Level</div>
+                            <div class="levelDiff">${hit.difficulty} Level</div>
                             <div class="sport">
                                 ${hit.sport}
                                 ${hit.sport === 'Swimming' ? '<i class="fa-solid fa-person-swimming"></i>' : ''}
