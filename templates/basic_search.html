@@ -1,13 +1,43 @@
 {% extends 'main_template.html' %}
 
 {% block title %}
-<title>Basic Search</title>
-{% endblock %}
-
-{% block head %}
-
+<title>SQL Search</title>
 {% endblock %}
 
 {% block content %}
-    
+<div>
+    <h1>Search Workouts</h1>
+    <form method="GET" action="/basic">
+        <input type="text" name="query" placeholder="Search workouts..." value="{{ query|default('') }}">
+        <button type="submit">Search</button>
+    </form>
+    <h2>Results</h2>
+    <div class="custom-hits">
+        {% for workout in workouts %}
+        <div class="">
+            <div id="{{ workout.id }}" class="card m-4 p-4">
+                <div class="title">{{ workout.title }}</div>
+                <div class="subtitle">{{ workout.details[:100] }}...</div>
+                <div class="created-at">{{ workout.created_at }}</div>
+                <div class="levelDiff">{{ workout.difficulty }} Level</div>
+                <div class="sport">
+                    {{ workout.sport }}
+                    {% if workout.sport == 'Swimming' %}
+                    <i class="fa-solid fa-person-swimming"></i>
+                    {% elif workout.sport == 'Running' %}
+                    <i class="fa-solid fa-person-running"></i>
+                    {% elif workout.sport == 'Lifting' %}
+                    <i class="fa-solid fa-dumbbell"></i>
+                    {% elif workout.sport == 'Biking' %}
+                    <i class="fa-solid fa-person-biking"></i>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>No workouts found.</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+
