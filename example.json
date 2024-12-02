@@ -1,0 +1,82 @@
+[
+    {
+        "objectID": 1,
+        "title": "Morning Swim",
+        "details": "A refreshing morning swim at the pool.",
+        "sport": "Swimming",
+        "difficulty": "Beginner",
+        "created_at": "11-30-2024"
+    },
+    {
+        "objectID": 2,
+        "title": "Hill Sprints",
+        "details": "Running sprints uphill for endurance.",
+        "sport": "Running",
+        "difficulty": "Advanced",
+        "created_at": "11-29-2024"
+    },
+    {
+        "objectID": 3,
+        "title": "Interval Biking",
+        "details": "High-intensity cycling intervals.",
+        "sport": "Biking",
+        "difficulty": "Intermediate",
+        "created_at": "11-28-2024"
+    },
+    {
+        "objectID": 4,
+        "title": "Leg Day Lifting",
+        "details": "Squats, lunges, and deadlifts.",
+        "sport": "Lifting",
+        "difficulty": "Advanced",
+        "created_at": "11-27-2024"
+    },
+    {
+        "objectID": 5,
+        "title": "Evening Jog",
+        "details": "A light jog through the neighborhood.",
+        "sport": "Running",
+        "difficulty": "Beginner",
+        "created_at": "11-26-2024"
+    },
+    {
+        "objectID": 6,
+        "title": "Long-Distance Biking",
+        "details": "A 20-mile cycling session.",
+        "sport": "Biking",
+        "difficulty": "Intermediate",
+        "created_at": "11-25-2024"
+    },
+    {
+        "objectID": 7,
+        "title": "Strength Training",
+        "details": "Focused lifting for upper body strength.",
+        "sport": "Lifting",
+        "difficulty": "Intermediate",
+        "created_at": "11-24-2024"
+    },
+    {
+        "objectID": 8,
+        "title": "Butterfly Stroke Practice",
+        "details": "Improving butterfly swimming technique.",
+        "sport": "Swimming",
+        "difficulty": "Advanced",
+        "created_at": "11-23-2024"
+    },
+    {
+        "objectID": 9,
+        "title": "Recovery Swim",
+        "details": "Light swimming for active recovery.",
+        "sport": "Swimming",
+        "difficulty": "Beginner",
+        "created_at": "11-22-2024"
+    },
+    {
+        "objectID": 10,
+        "title": "Tempo Run",
+        "details": "Sustained running at a challenging pace.",
+        "sport": "Running",
+        "difficulty": "Intermediate",
+        "created_at": "11-21-2024"
+    }
+]
