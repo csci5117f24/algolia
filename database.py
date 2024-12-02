@@ -117,16 +117,16 @@ def create_workout(title, details, sport, difficulty):
             created_at = result[1]
             
             # Tech Demo - Algolia
-            # algolia_data = {
-            # "objectID": workout_id,  
-            # "title": title,
-            # "details": details,
-            # "sport": sport,
-            # "difficulty": difficulty,
-            # "created_at": created_at.strftime("%m-%d-%Y")
-            # }
+            algolia_data = {
+            "objectID": workout_id,  
+            "title": title,
+            "details": details,
+            "sport": sport,
+            "difficulty": difficulty,
+            "created_at": created_at.strftime("%m-%d-%Y")
+            }
 
-            # save_resp = client.save_object(index_name=ALGOLIA_WORKOUT_INDEX, body=algolia_data,)
+            save_resp = client.save_object(index_name=ALGOLIA_WORKOUT_INDEX, body=algolia_data,)
             
             return workout_id
         
@@ -135,7 +135,7 @@ def delete_workout(id):
         cur.execute("DELETE FROM workouts WHERE id = %s;", (id,))
         
         # Tech Demo - Algolia
-        # delete_resp = client.delete_object(index_name=ALGOLIA_WORKOUT_INDEX, object_id=str(id))
+        delete_resp = client.delete_object(index_name=ALGOLIA_WORKOUT_INDEX, object_id=str(id))
         
 def update_workout(id, title, details, sport, difficulty):
     with get_db_cursor(True) as cur:
@@ -151,16 +151,16 @@ def update_workout(id, title, details, sport, difficulty):
         created_at = result[1]
         
         # Tech Demo - Algolia
-        # algolia_data = {
-        #     "objectID": workout_id,
-        #     "title": title,
-        #     "details": details,
-        #     "sport": sport,
-        #     "difficulty": difficulty,
-        #     "created_at": created_at.strftime("%m-%d-%Y")
-        # }
+        algolia_data = {
+            "objectID": workout_id,
+            "title": title,
+            "details": details,
+            "sport": sport,
+            "difficulty": difficulty,
+            "created_at": created_at.strftime("%m-%d-%Y")
+        }
         
-        # save_resp = client.save_object(index_name=ALGOLIA_WORKOUT_INDEX, body=algolia_data,)
+        save_resp = client.save_object(index_name=ALGOLIA_WORKOUT_INDEX, body=algolia_data,)
         
     
     
