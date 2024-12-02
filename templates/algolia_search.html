@@ -5,9 +5,170 @@
 {% endblock %}
 
 {% block head %}
-
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css/themes/satellite-min.css">
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
 {% endblock %}
 
 {% block content %}
-    
+<!-- Main container -->
+<nav class="level mt-4 ">
+    <!-- Left side -->
+    <div class="level-left">
+        <div class="level-item">
+            <div id="searchbox" class="searchbox"></div>
+        </div>
+    </div>
+
+    <!-- Right side -->
+    <div class="level-right">
+        <div class="level-item">
+            <button class="" onclick="showfilter()">
+                <i class="fa-solid fa-filter"></i> Filter
+            </button>
+            <div class="filter" hidden>
+                <h4>Sport</h4>
+                <div id="filterSport" class="filter-container"></div>
+                <h4>Difficulty</h4>
+                <div id="filterDifficulty" class="filter-container"></div>
+            </div>
+        </div>
+        <div class="level-item">
+            <button class="" onclick="showsort()">
+                <i class="fa-solid fa-sort"></i> Sort
+            </button>
+            <div class="sort" hidden>
+                <div id="sortContainer" class="sort-container"></div>
+            </div>
+        </div>
+        <div class="level-item">
+            <button class="" onclick="window.location.href='/createworkout'"> 
+                <i class="fa fa-plus"></i> Create Workout
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="container m-4">
+    <div id="hits"></div>
+    <div id="pagination"></div>
+</div>
+
+<script>
+    function showfilter() {
+        document.querySelector('.filter').hidden = !document.querySelector('.filter').hidden
+        document.querySelector('.sort').hidden = true
+    }
+    function showsort() {
+        document.querySelector('.sort').hidden = !document.querySelector('.sort').hidden
+        document.querySelector('.filter').hidden = true
+    }
+
+    {% raw %}
+
+    // Initialize the search
+    const search = instantsearch({
+        indexName: 'Project1_upvotes_desc',
+        searchClient: algoliasearch('TXUA4KW9VM', 'd2a3cdfe11a4b3f10359f4eae06a75fe'),
+    });
+
+    // Search box widget
+    search.addWidget(
+        instantsearch.widgets.searchBox({
+            container: '#searchbox',
+            placeholder: 'Search Workouts...',
+        })
+    );
+
+    // Filter
+    search.addWidgets([
+        instantsearch.widgets.refinementList({
+            container: '#filterSport',
+            attribute: 'sport',
+            limit: 5,
+        }),
+        instantsearch.widgets.refinementList({
+            container: '#filterDifficulty',
+            attribute: 'leveldiff',
+            limit: 5,
+        }),
+    ]);
+
+    // Sort
+    search.addWidget(
+        instantsearch.widgets.sortBy({
+            container: '#sortContainer',
+            items: [
+                { label: 'Alphabetical', value: 'Project1_alph' },
+                { label: 'Reverse Alphabetical', value: 'Project1_alph_reverse' },
+                { label: 'Newest', value: 'Project1' },
+                { label: 'Oldest', value: 'Project1_date_asc' },
+                { label: 'Most Upvoted', value: 'Project1_upvotes_desc' },
+                { label: 'Least Upvoted', value: 'Project1_upvotes_asc' },
+            ],
+        })
+    );
+
+    // Hits widget (displays search results)
+    const customHits = instantsearch.connectors.connectHits((renderOptions, isFirstRender) => {
+        const { hits, widgetParams } = renderOptions;
+
+        const container = widgetParams.container;
+        if (hits.length === 0) {
+            container.innerHTML = '<div class=""><div class="">No results found</div></div>';
+        } else {
+            container.innerHTML = `
+            <div class="custom-hits">
+                ${hits.map(hit => `
+                    <div class="">
+                        <div id="${hit.objectID}" class="card m-4 p-4">
+                            <div class="title">${instantsearch.highlight({ attribute: 'title', hit })}</div>
+                            <div class="subtitle">${instantsearch.highlight({ attribute: 'short_description', hit })}</div>
+                            <div class="created-at">${hit.created_at}</div>
+                            <div class="levelDiff">${hit.leveldiff} Level</div>
+                            <div class="sport">
+                                ${hit.sport}
+                                ${hit.sport === 'Swimming' ? '<i class="fa-solid fa-person-swimming"></i>' : ''}
+                                ${hit.sport === 'Running' ? '<i class="fa-solid fa-person-running"></i>' : ''}
+                                ${hit.sport === 'Lifting' ? '<i class="fa-solid fa-dumbbell"></i>' : ''}
+                                ${hit.sport === 'Biking' ? '<i class="fa-solid fa-person-biking"></i>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>`;
+        }
+    });
+
+    // Initialize the custom hits widget
+    search.addWidget(
+        customHits({
+            container: document.querySelector('#hits'),
+        })
+    );
+
+    // Pagination
+    search.addWidget(
+        instantsearch.widgets.pagination({
+            container: '#pagination',
+            cssClasses: {
+                root: 'pagination',
+                item: 'pagination-item',
+                link: 'pagination-link',
+                selectedItem: 'pagination-item-selected',
+            },
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.configure({
+            hitsPerPage: 9,
+            query: '', // default so that there are some initial results on the first load
+        })
+    );
+
+    search.start();
+    {% endraw %}
+</script>
+
 {% endblock %}
