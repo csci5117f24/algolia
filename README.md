@@ -1,5 +1,4 @@
 # Team Codemaxxing Tech Share
-links:
 
 ## Useful Links
 - [Algolia Main Website](https://www.algolia.com)
