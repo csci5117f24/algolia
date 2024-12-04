@@ -17,8 +17,8 @@ Before starting, ensure you have the following installed:
 
   
 ## How to start the website?
--clone the GitHub repository 
--create .env and put your Algolia API keys
+- clone the GitHub repository 
+- create .env and put your Algolia API keys
 - Run the following commands in the terminal:
   - pipenv install       # Install project dependencies
   - pipenv shell         # Activate the virtual environment
